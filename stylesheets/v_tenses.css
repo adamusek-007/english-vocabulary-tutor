@@ -1,0 +1,24 @@
+fieldset label {
+    float: left;
+}
+
+fieldset input {
+    float: right;
+}
+select, select * {
+    color: black;
+}
+fieldset {
+    text-align: center;
+    border-color: cadetblue;
+    margin-top: 20px;
+}
+.row {
+    width: 100%;
+}
+input[type=submit] {
+    margin-top: 8px;
+    border-radius: 10px;
+    border-color: #6E6161;
+    background-color: #fc8f8c;
+}

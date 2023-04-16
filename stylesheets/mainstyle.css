@@ -1,0 +1,13 @@
+* {
+    font-family: Helvetica;
+    font-size: 25px;
+    color: white;
+}
+
+body {
+    text-align: center;
+    background-color: #7e6c6c;
+}
+input {
+    background-color: #5D5656;
+}
