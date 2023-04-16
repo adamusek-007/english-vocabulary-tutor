@@ -1,3 +1,9 @@
+<?php
+include "classes.php";
+$connector = new Connector();
+$connection = $connector->getConnectionToDatabase();
+$view_generator = new ViewGenerator();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -10,21 +16,12 @@
 </head>
 
 <body onload="getWordCount();">
-    <div>
-        <?php
-        include "classes.php";
-        $connector = new Connector();
-        $connection = $connector->getConnectionToDatabase();
-        $view_generator = new ViewGenerator();
-        ?>
-    </div>
     <a href="index.html"><img src="images/home.png" id="go-home"></a>
     <form action="v_input.php" method="POST">
         <label for="unit-sel">Wybierz dział</label>
-        <select id="unit-sel" name="u-sel-unit" onchange="changeSubunitSelection(this)">
+        <select id="unit-sel" name="u-sel-unit" onchange="setSubunitSelection(this)">
             <?php
             $view_generator->setUnitsSelectView($connection, "unit");
-            mysqli_close($connection);
             ?>
         </select>
         <label for="subunit-sel">Wybierz pod-dział</label>
@@ -39,12 +36,12 @@
             <option value="know">Umiem</option>
             <option value="know-well">Umiem bardzo dobrze</option>
             <option value="no-answer">Te na które jeszcze nie odpowiedziałem</option>
-            <option value="optimal">Optymalnie pod kątem zapamiętywania</option>
+            <option value="optimal" selected>Optymalnie pod kątem zapamiętywania</option>
         </select>
         <label for="u-sel-answering-mode">Tryb odpowiadania</label>
         <select name="u-sel-answering-mode">
             <option value="reply-choose">Wybierz spośród kilku różnych odpowiedzi</option>
-            <option value="reply_manualy">Wpisz odpowiedź ręcznie</option>
+            <option value="reply_manualy" selected>Wpisz odpowiedź ręcznie</option>
         </select>
         <label class="inline" for="u-sel-hints-mode">Włącz podpowiedzi</label>
         <input class="inline" name="u-sel-hints-mode" value="on" type="checkbox"><br>
@@ -54,5 +51,8 @@
     </form>
     <script src="summon-php-scripts.js"></script>
 </body>
+
+<!-- śnieżyca/zamieć - whiteout -->
+<!-- zamieć śnieżna - blizzard -->
 
 </html>

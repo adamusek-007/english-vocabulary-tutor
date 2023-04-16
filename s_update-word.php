@@ -15,5 +15,3 @@ $query = "UPDATE `words` SET `english` = '${en}', `polish` = '${pl}', `unit` = '
 $connector = new Connector();
 $connection = $connector->getConnectionToDatabase();
 $connection->query($query);
-mysqli_close($connection);
-?>

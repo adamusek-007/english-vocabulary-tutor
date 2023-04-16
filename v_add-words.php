@@ -58,11 +58,10 @@
             $unit = $_POST["unit"];
             $subunit = $_POST["subunit"];
             $query = "INSERT INTO words (`english`, `polish`, `unit`, `subunit`) VALUES ('${en}', '${pl}', '${unit}', '${subunit}');";
-            mysqli_query($connection, $query);
+            $connection->query($query);
         } else {
             echo "<h3>Nie wstawiono słówka!</h3>";
         }
-        mysqli_close($connection);
         ?>
     </div>
 

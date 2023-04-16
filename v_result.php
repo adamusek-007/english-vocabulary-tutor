@@ -46,16 +46,16 @@
         
         
         //! @Tests
-        getArrayOfCorrectAnswers("claim sth");
-        $correct_answers_array = getArrayOfCorrectAnswers($english_word);
-        $array1 = getArrayOfCorrectAnswers("top-of-the-range");
-        $uarray1 = array_unique($array1);
-        $endarray = array();
-        foreach ($uarray1 as $a) {
-            $tempArray = getArrayOfCorrectAnswers($a);
-            $endarray = array_merge($endarray, $tempArray);
-        }
-        $uendarray = array_unique($endarray);
+        // getArrayOfCorrectAnswers("claim sth");
+        // $correct_answers_array = getArrayOfCorrectAnswers($english_word);
+        // $array1 = getArrayOfCorrectAnswers("top-of-the-range");
+        // $uarray1 = array_unique($array1);
+        // $endarray = array();
+        // foreach ($uarray1 as $a) {
+        //     $tempArray = getArrayOfCorrectAnswers($a);
+        //     $endarray = array_merge($endarray, $tempArray);
+        // }
+        // $uendarray = array_unique($endarray);
 
         function updateRow($connection, $bool_correct, $correct_answers, $views, $row_id, $correct_answers_streak, $generating_mode, $row, $answering_mode)
         {
@@ -70,7 +70,7 @@
                 }
             }
             $query = "UPDATE `words` SET `views`='${views}', `correct_answers`='${correct_answers}', `last_viewed`=now(), `correct_answers_streak` = '${correct_answers_streak}', `date_time_to_repeat`=${formated_date_time}  WHERE `id`='${row_id}';";
-            mysqli_query($connection, $query);
+            $connection->query($query);
         }
         function getNextRepeatTime($correct_answers_streak)
         {
@@ -103,7 +103,7 @@
                 $next_repeat_time->add(new DateInterval("P2W"));
             } else if ($correct_answers_streak == 13) {
                 $next_repeat_time->add(new DateInterval("P1M"));
-            } else if ($correct_answers_streak == 13) {
+            } else {
                 $next_repeat_time->add(new DateInterval("P3M"));
             }
 
@@ -138,7 +138,6 @@
             array_push($arrayOfAnswers, $ucword);
             return $arrayOfAnswers;
         }
-        mysqli_close($connection);
         ?>
     </div>
 

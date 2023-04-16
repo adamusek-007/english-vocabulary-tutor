@@ -38,8 +38,8 @@
 
     $correct_result = getResultFromBase($connection, $u_sel_unit, $u_sel_subunit, $u_sel_generating_mode, $query_generator);
 
-    if (mysqli_num_rows($correct_result) == 0) {
-        $correct_result = mysqli_query($connection, "SELECT * FROM `words` WHERE 1;");
+    if ($correct_result->rowCount() == 0) {
+        $correct_result = $connection->query("SELECT * FROM `words` WHERE 1;");
         $result_avability = false;
     } else {
         $result_avability = true;
@@ -66,13 +66,13 @@
             if (isset($_POST["user-points"])) {
                 $p_points = $_POST["user-points"];
                 $query = "UPDATE `words` SET `user_rating` = ${p_points} WHERE `id`= ${p_row_id};";
-                mysqli_query($connection, $query);
+                $connection->query($query);
 
             }
             if (isset($_POST["reset-stats"])) {
                 if ($_POST["reset-stats"] == "1") {
                     $query = "UPDATE `words` SET `user_rating` = 0, `views` = 0, `correct_answers` = 0 WHERE id=${p_row_id};";
-                    mysqli_query($connection, $query);
+                    $connection->query($query);
                 }
             }
         }
@@ -85,7 +85,7 @@
         $q_part_subunit_selection = $query_generator->getUnitSubunitQueryPart($u_sel_subunit, "subunit");
         $q_part_mode_selection = $query_generator->getGeneratingModeQueryPart($u_sel_generating_mode);
         $query = "SELECT * FROM `words` WHERE ${q_part_unit_selection} AND ${q_part_subunit_selection} AND ${q_part_mode_selection};";
-        $correct_result = mysqli_query($connection, $query);
+        $correct_result = $connection->query($query);
         return $correct_result;
 
     }
@@ -100,7 +100,7 @@
     function getRowIdsArray($result)
     {
         $array_of_ids = array();
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             array_push($array_of_ids, $row["id"]);
         }
         return $array_of_ids;
@@ -109,29 +109,26 @@
     {
         $q_select_row = "SELECT * FROM `words` WHERE `id`=$random_row_id;";
         $result = $connection->query($q_select_row);
-        $row = $result->fetch_assoc();
+        $row = $result->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
     //! END ALWAYS
     function getArrayOfWrongAnswers($connection, $query)
     {
         $words_array = array();
-        $result = mysqli_query($connection, $query);
+        $result = $connection->query($query);
         $row_id_array = getRowIdsArray($result);
         $wrong_answers_ids_array = array_rand($row_id_array, 3);
         $w1 = $row_id_array[$wrong_answers_ids_array[0]];
         $w2 = $row_id_array[$wrong_answers_ids_array[1]];
         $w3 = $row_id_array[$wrong_answers_ids_array[2]];
         $q = "SELECT `english` FROM `words` WHERE `id` = ${w1} OR id = ${w2} OR id = ${w3};";
-        $result = mysqli_query($connection, $q);
-        while ($row = mysqli_fetch_assoc($result)) {
+        $result = $connection->query($q);
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             array_push($words_array, $row["english"]);
         }
         return $words_array;
     }
-
-    mysqli_close($connection);
-
     ?>
     </div>
     <section>

@@ -19,8 +19,8 @@
 
     $id = $_REQUEST["id"];
     $query = "SELECT * FROM `words` WHERE `id` = ${id}";
-    $result = mysqli_query($connection, $query);
-    $row = mysqli_fetch_assoc($result);
+    $stmt = $connection->query($query);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $en = $row["english"];
     $pl = $row["polish"];
     $unit = $row["unit"];
