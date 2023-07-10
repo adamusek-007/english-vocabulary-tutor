@@ -11,7 +11,7 @@ if (isset($hint) == false || $hint == "") {
 } else {
     $hint = "'" . $hint . "'";
 }
-$query = "UPDATE `words` SET `english` = '${en}', `polish` = '${pl}', `unit` = '${unit}', `subunit` = '${subunit}', `hint` = ${hint} WHERE `id` = '${id}';";
+$query = "UPDATE `words` SET `english` = '{$en}', `polish` = '{$pl}', `unit` = '{$unit}', `subunit` = '{$subunit}', `hint` = {$hint} WHERE `id` = '{$id}';";
 $connector = new Connector();
 $connection = $connector->getConnectionToDatabase();
 $connection->query($query);

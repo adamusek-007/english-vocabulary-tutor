@@ -69,7 +69,7 @@
                     $formated_date_time = "'" . $row["date_time_to_repeat"] . "'";
                 }
             }
-            $query = "UPDATE `words` SET `views`='${views}', `correct_answers`='${correct_answers}', `last_viewed`=now(), `correct_answers_streak` = '${correct_answers_streak}', `date_time_to_repeat`=${formated_date_time}  WHERE `id`='${row_id}';";
+            $query = "UPDATE `words` SET `views`='{$views}', `correct_answers`='{$correct_answers}', `last_viewed`=now(), `correct_answers_streak` = '{$correct_answers_streak}', `date_time_to_repeat`={$formated_date_time}  WHERE `id`='{$row_id}';";
             $connection->query($query);
         }
         function getNextRepeatTime($correct_answers_streak)
@@ -151,13 +151,13 @@
     <section id="top-section">
         <div>
             <?php
-            echo "<img src=images/ok.png><p class='correct-answer'>${english_word}</p>";
+            echo "<img src=images/ok.png><p class='correct-answer'>{$english_word}</p>";
             ?>
         </div>
         <div>
             <?php
             if ($bool_correct == false) {
-                echo "<img src=images/user_icon.png><p class='wrong-answer'>${parsed_user_answer}</p>";
+                echo "<img src=images/user_icon.png><p class='wrong-answer'>{$parsed_user_answer}</p>";
             }
             ?>
         </div>
@@ -192,8 +192,8 @@
         </fieldset>
         <section id="form-bottom-section">
             <?php
-            echo "<progress id='procentage-bar' value='${procentage_correct}' max='100'></progress>";
-            echo "<p>${procentage_correct}% poprawnych odpowiedzi</p>";
+            echo "<progress id='procentage-bar' value='{$procentage_correct}' max='100'></progress>";
+            echo "<p>{$procentage_correct}% poprawnych odpowiedzi</p>";
             ?>
             <label for="reset-stats">Resetuj statystyki</label>
             <input type="hidden" name="reset-stats" value="0">

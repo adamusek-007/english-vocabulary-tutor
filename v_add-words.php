@@ -57,7 +57,7 @@
             $pl = $_POST["pl"];
             $unit = $_POST["unit"];
             $subunit = $_POST["subunit"];
-            $query = "INSERT INTO words (`english`, `polish`, `unit`, `subunit`) VALUES ('${en}', '${pl}', '${unit}', '${subunit}');";
+            $query = "INSERT INTO words (`english`, `polish`, `unit`, `subunit`) VALUES ('{$en}', '{$pl}', '{$unit}', '{$subunit}');";
             $connection->query($query);
         } else {
             echo "<h3>Nie wstawiono słówka!</h3>";
@@ -69,10 +69,10 @@
         <section>
             <label for="unit">Dział: </label>
             <input type="number" id="unit" name="unit" min="0" max="8" value=<?php if ($b_unit)
-                echo "${unit}"; ?> required>
+                echo "{$unit}"; ?> required>
             <label for="subunit">Pod dział:</label>
             <input type="number" id="subunit" name="subunit" min="0" max="8" value=<?php if ($b_subunit)
-                echo "${subunit}"; ?> required>
+                echo "{$subunit}"; ?> required>
         </section>
         <label for="en">Angielski:</label>
         <input lang="en-GB" id="en" type="text" name="en" autocomplete="off" autofocus autocapitalize="off" required>

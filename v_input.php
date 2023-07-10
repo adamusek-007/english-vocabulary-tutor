@@ -51,7 +51,7 @@
 
     if ($u_sel_answering_mode == "reply-choose") {
         $correct_row_id = $correct_row["id"];
-        $random_query = "SELECT * FROM `words` WHERE `id` != ${correct_row_id};";
+        $random_query = "SELECT * FROM `words` WHERE `id` != {$correct_row_id};";
         $wrong_answers_array = getArrayOfWrongAnswers($connection, $random_query);
         $answers_array = array($correct_english_word, $wrong_answers_array[0], $wrong_answers_array[1], $wrong_answers_array[2]);
     } else {
@@ -65,13 +65,13 @@
             $p_row_id = $previous_row["id"];
             if (isset($_POST["user-points"])) {
                 $p_points = $_POST["user-points"];
-                $query = "UPDATE `words` SET `user_rating` = ${p_points} WHERE `id`= ${p_row_id};";
+                $query = "UPDATE `words` SET `user_rating` = {$p_points} WHERE `id`= {$p_row_id};";
                 $connection->query($query);
 
             }
             if (isset($_POST["reset-stats"])) {
                 if ($_POST["reset-stats"] == "1") {
-                    $query = "UPDATE `words` SET `user_rating` = 0, `views` = 0, `correct_answers` = 0 WHERE id=${p_row_id};";
+                    $query = "UPDATE `words` SET `user_rating` = 0, `views` = 0, `correct_answers` = 0 WHERE id={$p_row_id};";
                     $connection->query($query);
                 }
             }
@@ -84,7 +84,7 @@
         $q_part_unit_selection = $query_generator->getUnitSubunitQueryPart($u_sel_unit, "unit");
         $q_part_subunit_selection = $query_generator->getUnitSubunitQueryPart($u_sel_subunit, "subunit");
         $q_part_mode_selection = $query_generator->getGeneratingModeQueryPart($u_sel_generating_mode);
-        $query = "SELECT * FROM `words` WHERE ${q_part_unit_selection} AND ${q_part_subunit_selection} AND ${q_part_mode_selection};";
+        $query = "SELECT * FROM `words` WHERE {$q_part_unit_selection} AND {$q_part_subunit_selection} AND {$q_part_mode_selection};";
         $correct_result = $connection->query($query);
         return $correct_result;
 
@@ -122,7 +122,7 @@
         $w1 = $row_id_array[$wrong_answers_ids_array[0]];
         $w2 = $row_id_array[$wrong_answers_ids_array[1]];
         $w3 = $row_id_array[$wrong_answers_ids_array[2]];
-        $q = "SELECT `english` FROM `words` WHERE `id` = ${w1} OR id = ${w2} OR id = ${w3};";
+        $q = "SELECT `english` FROM `words` WHERE `id` = {$w1} OR id = {$w2} OR id = {$w3};";
         $result = $connection->query($q);
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             array_push($words_array, $row["english"]);

@@ -18,7 +18,7 @@
     $connection = $connector->getConnectionToDatabase();
 
     $id = $_REQUEST["id"];
-    $query = "SELECT * FROM `words` WHERE `id` = ${id}";
+    $query = "SELECT * FROM `words` WHERE `id` = {$id}";
     $stmt = $connection->query($query);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $en = $row["english"];
@@ -39,7 +39,7 @@
         </section>
         <input type="hidden" id="word-id" value="<?php echo $id ?>">
         <label for="en">Angielski:</label>
-        <input lang="en" id="en" type="text" name="en-GB" autocomplete="off" autofocus autocapitalize="off" value=<?php echo "${en}"; ?>>
+        <input lang="en" id="en" type="text" name="en-GB" autocomplete="off" autofocus autocapitalize="off" value=<?php echo "{$en}"; ?>>
 
         <label for="pl">Polski:</label>
         <input type="text" id="pl" name="pl" autocomplete="off" autocapitalize="off" value="<?php echo $pl; ?>">
