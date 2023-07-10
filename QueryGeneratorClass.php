@@ -4,9 +4,9 @@ class QueryGenerator
     function getUnitSubunitQueryPart($u_sel, $unit_subunit)
     {
         if ($u_sel == "Wszystkie") {
-            return "`${unit_subunit}` = `${unit_subunit}`";
+            return "`{$unit_subunit}` = `{$unit_subunit}`";
         } else {
-            return "`${unit_subunit}` = ${u_sel}";
+            return "`{$unit_subunit}` = {$u_sel}";
         }
     }
     function getGeneratingModeQueryPart($generating_mode)
@@ -33,7 +33,7 @@ class QueryGenerator
             $query = "SELECT `id`, `english`, `polish`, `hint`, `subunit` FROM `words` WHERE `unit` = `unit` ORDER BY `subunit`, `english`;";
             return $query;
         } else {
-            $query = "SELECT `id`, `english`, `polish`, `hint`, `subunit` FROM `words` WHERE `unit` = ${unit} ORDER BY `subunit`, `english`;";
+            $query = "SELECT `id`, `english`, `polish`, `hint`, `subunit` FROM `words` WHERE `unit` = {$unit} ORDER BY `subunit`, `english`;";
             return $query;
         }
     }
@@ -43,7 +43,7 @@ class QueryGenerator
             $query = "SELECT DISTINCT `subunit` FROM `words` ORDER BY `subunit` ASC;";
             return $query;
         } else {
-            $query = "SELECT DISTINCT `subunit` FROM `words` WHERE `unit` = ${unit} ORDER BY `subunit` ASC;";
+            $query = "SELECT DISTINCT `subunit` FROM `words` WHERE `unit` = {$unit} ORDER BY `subunit` ASC;";
             return $query;
         }
     }
