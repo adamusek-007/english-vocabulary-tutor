@@ -1,5 +1,5 @@
 <?php
-include "classes.php";
+include("../classes.php");
 $connector = new Connector();
 $connection = $connector->getConnectionToDatabase();
 $view_generator = new ViewGenerator();
@@ -11,12 +11,12 @@ $view_generator = new ViewGenerator();
     <title>Wybierz tryb</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylesheets/mainstyle.css">
-    <link rel="stylesheet" href="stylesheets/v_mode-selection.css">
+    <link rel="stylesheet" href="../stylesheets/mainstyle.css">
+    <link rel="stylesheet" href="../stylesheets/v_mode-selection.css">
 </head>
 
 <body onload="getWordCount();">
-    <a href="index.html"><img src="images/home.png" id="go-home"></a>
+    <a href="../index.html"><i class="fa-solid fa-house"></i></a>
     <form action="v_input.php" method="POST">
         <label for="unit-sel">Wybierz dział</label>
         <select id="unit-sel" name="u-sel-unit" onchange="setSubunitSelection(this)">
@@ -49,10 +49,34 @@ $view_generator = new ViewGenerator();
         <input type="submit" value="Zatwierdź">
         <label id="word-count"></label>
     </form>
-    <script src="summon-php-scripts.js"></script>
+    <script>
+        function getWordCount() {
+            const xhttp = new XMLHttpRequest();
+            var unitSelection = document.getElementById("unit-sel").value;
+            var subunitSelection = document.getElementById("subunit-sel").value;
+            var mode = document.getElementById("generating-mode-sel").value;
+            xhttp.onload = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var wordCountText = "Wybrana liczba słówek: " + this.responseText;
+                    document.getElementById("word-count").innerHTML = wordCountText;
+                }
+            }
+            xhttp.open("GET", "../s_get-selection-word-count.php?unit=" + unitSelection + "&subunit=" + subunitSelection + "&mode=" + mode);
+            xhttp.send();
+        }
+        function setSubunitSelection(unitSelection) {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("subunit-sel").innerHTML = this.responseText;
+                    getWordCount();
+                }
+            }
+            xhttp.open("GET", "s_get-subunit.php?s=" + unitSelection.value);
+            xhttp.send();
+        }
+    </script>
+    <script src="https://kit.fontawesome.com/4de8e58cfc.js" crossorigin="anonymous"></script>
 </body>
-
-<!-- śnieżyca/zamieć - whiteout -->
-<!-- zamieć śnieżna - blizzard -->
 
 </html>
