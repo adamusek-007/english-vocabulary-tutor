@@ -15,7 +15,7 @@
 
     <div>
         <?php
-        include "classes.php";
+        include ("../classes.php");
         $connector = new Connector();
         $connection = $connector->getConnectionToDatabase();
 
