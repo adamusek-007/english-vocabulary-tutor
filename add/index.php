@@ -19,39 +19,19 @@
         $connector = new Connector();
         $connection = $connector->getConnectionToDatabase();
 
-        $b_en = isset($_POST["en"]);
-        if ($b_en) {
-            if (empty($_POST["en"])) {
-                $b_en = false;
-            } else {
-                $b_en = true;
-            }
-        }
-        $b_pl = isset($_POST["pl"]);
-        if ($b_pl) {
-            if (empty($_POST["pl"])) {
-                $b_pl = false;
-            } else {
-                $b_pl = true;
-            }
-        }
-        $b_unit = isset($_POST["unit"]);
-        if ($b_unit) {
-            if (empty($_POST["unit"])) {
-                $b_unit = false;
-            } else {
-                $b_unit = true;
-            }
-        }
-        $b_subunit = isset($_POST["subunit"]);
-        if ($b_subunit) {
-            if (empty($_POST["subunit"])) {
-                $b_subunit = false;
-            } else {
-                $b_subunit = true;
-            }
-        }
+        $booleans = ["en", "pl", "unit", "subunit"];
 
+        foreach ($booleans as $i) {
+            $bool = "b_" . $i;
+            $$bool = isset($POST[$i]);
+            if($$bool) {
+                if(empty($POST[$i])) {
+                    $$bool = false;
+                } else {
+                    $$bool = true;
+                }
+            }
+        }
         if ($b_en && $b_pl && $b_unit && $b_subunit) {
             $en = $_POST["en"];
             $pl = $_POST["pl"];
