@@ -1,5 +1,5 @@
 <?php
-require_once("classes.php");
+require_once("../classes.php");
 $connector = new Connector();
 $connection = $connector->getConnectionToDatabase();
 $view_generator = new ViewGenerator();
@@ -9,8 +9,8 @@ $view_generator = new ViewGenerator();
 
 <head>
     <title>Wyświetl słówka</title>
-    <link rel="stylesheet" href="stylesheets/v_words.css">
-    <link rel="stylesheet" href="stylesheets/mainstyle.css">
+    <link rel="stylesheet" href="../stylesheets/v_words.css">
+    <link rel="stylesheet" href="../stylesheets/mainstyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -20,7 +20,7 @@ $view_generator = new ViewGenerator();
 
 <body>
     <section>
-        <a href="index.html" id="home-ico"><i class="fa-solid fa-house"></i></a>
+        <a href="../index.html" id="home-ico"><i class="fa-solid fa-house"></i></a>
         <select onchange="getTableWordsView(this.value)">
             <?php
             $view_generator->setUnitsSelectView($connection, "unit");
@@ -29,7 +29,7 @@ $view_generator = new ViewGenerator();
     </section>
     <table id="table-view">
     </table>
-    <script src="summon-php-scripts.js"></script>
+    <script src="../summon-php-scripts.js"></script>
 </body>
 
 </html>
