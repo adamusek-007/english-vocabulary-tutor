@@ -3,9 +3,9 @@ class ViewGenerator
 {
     function setUnitsSelectView($connection, $unit)
     {
+        echo "<option>Wszystkie</option>";
         $stmt = $connection->prepare("SELECT DISTINCT {$unit} FROM words ORDER BY {$unit} ASC;");
         $stmt->execute();
-        echo "<option>Wszystkie</option>";
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo "<option>". $row['unit'] . "</option>";
         }
