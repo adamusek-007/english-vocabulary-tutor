@@ -1,32 +1,32 @@
-        <?php
-        include ("../classes.php");
-        $connector = new Connector();
-        $connection = $connector->getConnectionToDatabase();
-
-        $booleans = ["en", "pl", "unit", "subunit"];
-
-        foreach ($booleans as $i) {
-            $bool = "b_" . $i;
-            $$bool = isset($POST[$i]);
-            if($$bool) {
-                if(empty($POST[$i])) {
-                    $$bool = false;
-                } else {
-                    $$bool = true;
-                }
-            }
-        }
-        if ($b_en && $b_pl && $b_unit && $b_subunit) {
-            $en = $_POST["en"];
-            $pl = $_POST["pl"];
-            $unit = $_POST["unit"];
-            $subunit = $_POST["subunit"];
-            $query = "INSERT INTO words (`english`, `polish`, `unit`, `subunit`) VALUES ('{$en}', '{$pl}', '{$unit}', '{$subunit}');";
-            $connection->query($query);
+<?php
+include("../classes.php");
+$connector = new Connector();
+$connection = $connector->getConnectionToDatabase();
+$booleans = ["en", "pl", "unit", "subunit"];
+foreach ($booleans as $i) {
+    $bool = "b_" . $i;
+    $$bool = isset($_POST[$i]);
+    if ($$bool) {
+        if (empty($_POST[$i])) {
+            $$bool = false;
         } else {
-            echo "<h3>Nie wstawiono słówka!</h3>";
+            $$bool = true;
         }
-        ?>
+    }
+}
+if ($b_en && $b_pl && $b_unit && $b_subunit) {
+    $en = $_POST["en"];
+    $pl = $_POST["pl"];
+    $unit = $_POST["unit"];
+    $subunit = $_POST["subunit"];
+    $query = "INSERT INTO words (`english`, `polish`, `unit`, `subunit`) VALUES ('{$en}', '{$pl}', '{$unit}', '{$subunit}');";
+    $connection->query($query);
+} else if (!$b_en && !$b_pl && !$b_unit && !$b_subunit) {
+    echo "";
+} else {
+    echo "<h3>Nie wstawiono słówka!</h3>";
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -44,7 +44,8 @@
         <section>
             <label for="unit">Dział: </label>
             <input type="number" id="unit" name="unit" min="0" max="8" value=<?php if ($b_unit)
-                echo "{$unit}"; ?> required>
+                echo "{$unit}"; ?>
+                required>
             <label for="subunit">Pod dział:</label>
             <input type="number" id="subunit" name="subunit" min="0" max="8" value=<?php if ($b_subunit)
                 echo "{$subunit}"; ?> required>
