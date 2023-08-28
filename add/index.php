@@ -1,19 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Dodaj słówko</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../stylesheets/mainstyle.css">
-    <link rel="stylesheet" href="../stylesheets/v_add-words.css">
-
-</head>
-
-<body>
-    <a href="../index.html"><img src="../images/home.png" id="go-home"></a><br>
-
-    <div>
         <?php
         include ("../classes.php");
         $connector = new Connector();
@@ -43,8 +27,19 @@
             echo "<h3>Nie wstawiono słówka!</h3>";
         }
         ?>
-    </div>
+<!DOCTYPE html>
+<html>
 
+<head>
+    <title>Dodaj słówko</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../stylesheets/mainstyle.css">
+    <link rel="stylesheet" href="../stylesheets/v_add-words.css">
+</head>
+
+<body>
+    <a href="../index.html"><i class="fa-solid fa-house"></i></a>
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <section>
             <label for="unit">Dział: </label>
