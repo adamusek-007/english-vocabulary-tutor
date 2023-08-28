@@ -20,6 +20,7 @@ $view_generator = new ViewGenerator();
     <form action="v_input.php" method="POST">
         <label for="unit-sel">Wybierz dział</label>
         <select id="unit-sel" name="u-sel-unit" onchange="setSubunitSelection(this)">
+            
             <?php
             $view_generator->setUnitsSelectView($connection, "unit");
             ?>
@@ -43,8 +44,8 @@ $view_generator = new ViewGenerator();
             <option value="reply-choose">Wybierz spośród kilku różnych odpowiedzi</option>
             <option value="reply_manualy" selected>Wpisz odpowiedź ręcznie</option>
         </select>
-        <label class="inline" for="u-sel-hints-mode">Włącz podpowiedzi</label>
-        <input class="inline" name="u-sel-hints-mode" value="on" type="checkbox"><br>
+        <!-- <label class="inline" for="u-sel-hints-mode">Włącz podpowiedzi</label>
+        <input class="inline" name="u-sel-hints-mode" value="on" type="checkbox"><br> -->
         <input name="website" value="mode-selection" type="hidden">
         <input type="submit" value="Zatwierdź">
         <label id="word-count"></label>
