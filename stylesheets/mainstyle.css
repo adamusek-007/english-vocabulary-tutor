@@ -11,3 +11,6 @@ body {
 input {
     background-color: #5D5656;
 }
+a {
+    float: left;
+}
