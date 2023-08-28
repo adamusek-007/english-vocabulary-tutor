@@ -1,5 +1,5 @@
 <?php
-require_once("ViewGeneratorClass.php");
-require_once("QueryGeneratorClass.php");
-require_once("ConnectionClass.php");
+include("ViewGeneratorClass.php");
+include("QueryGeneratorClass.php");
+include("ConnectionClass.php");
 ?>
