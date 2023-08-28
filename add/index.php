@@ -61,6 +61,7 @@
 
         <input type="submit" value="Dodaj">
     </form>
+    <script src="https://kit.fontawesome.com/4de8e58cfc.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
